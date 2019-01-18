@@ -1,0 +1,8 @@
+---
+layout: post
+title:  "测试date生成"
+author: "XNRavenZen"
+categories: test
+summary: 
+---
+test

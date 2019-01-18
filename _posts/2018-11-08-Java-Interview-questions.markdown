@@ -1,10 +1,12 @@
 ---
 layout: post
 title:  "Java面试题整理"
+author: "XNRavenZen"
 date:   2018-11-08 08:52:55 +0800
 categories: java
 summary: 整理一下java面试题
 ---
+
 ### 多线程的实现方式
 1. 继承Thread类;
 2. 实现Runnable接口,重写run方法，实现Runnable接口的实现类的实例对象作为Thread构造函数的target;

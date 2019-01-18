@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "Welcome to Jekyll!"
+author: jekyll
 date:   2018-10-24 16:52:05 +0800
-categories: jekyll update
+categories: jekyll
 summary: jekyll默认生成的文档，刚好是程序员节，留作纪念
 ---
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.

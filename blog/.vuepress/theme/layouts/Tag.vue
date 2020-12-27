@@ -1,12 +1,6 @@
 <template>
   <div class="tag">
     <template v-if="$frontmatterKey && $frontmatterKey.list">
-      <!-- <BaseButton
-        v-for="tag in doNothing($frontmatterKey).list"
-        :fillText="doNothing(tag).name"
-        @click="$router.push({path:tag.path})"
-        style:
-      /> -->
       <BaseButton
         v-for="tag in $frontmatterKey.list"
         :fillText="tag.name"
@@ -19,17 +13,14 @@
   </ul>
 </template>
 <script lang="ts">
-import {
-  defineComponent,
-  ref,
-  reactive,
-  toRefs,
-  computed,
-  onUpdated,
-} from "@vue/composition-api";
+import { defineComponent, ref } from "@vue/composition-api";
+
 export default defineComponent({
   setup(props, context) {
+    const tagData = context.parent.$tag;
+    console.error("页面数据", context.parent, tagData.list);
     const filtedPages = ref([]);
+    filtedPages.value = tagData.list[0] ? tagData.list[0].pages : [];
     const doNothing = (thing) => {
       console.error("看看是啥", thing);
       return thing;

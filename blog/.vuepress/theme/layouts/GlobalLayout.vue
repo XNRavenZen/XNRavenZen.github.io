@@ -1,3 +1,6 @@
+<!--
+ * @LastEditors: XNRavenZen
+-->
 <template>
   <div class="global-layout">
     <header>
@@ -12,22 +15,16 @@
         to="/github/"
         v-slot="{ href, route, navigate, isActive, isExactActive }"
       >
-        <!-- <BaseIcon
-          class="github-icon-cat"
-          suffix="github"
-          @click.native="navigate"
-        /> -->
-        <SvgIcon
-          iconClass="github"
-          class="github-icon-cat"
-          suffix="github"
-          @click.native="navigate"
-        ></SvgIcon>
+        <GithubIcon @click="navigate"></GithubIcon>
       </router-link>
     </header>
     <aside :class="['menu-bar', showMenuBar ? 'menu-bar-open' : '']">
       <div class="portrait">
-        <img :src="$withBase($themeConfig.avatar)" alt="" class="portrait-avatar" />
+        <img
+          :src="$withBase($themeConfig.avatar)"
+          alt=""
+          class="portrait-avatar"
+        />
       </div>
     </aside>
     <div v-if="showMenuBar" @click="toggleMenuBar" class="menu-bar-mask" />
@@ -46,11 +43,11 @@ import { defineComponent, ref, computed, provide, inject, onMounted, nextTick, g
 import scrollbarMethod from '$utils/generateScrollWidth';
 import GlobalLayout from '@app/components/GlobalLayout.vue';
 import moment from "moment";
-import { provideStore } from '$plugins/loading';
+import GithubIcon from "$svgIcon/github.svg";
 
 export default defineComponent({
   name: "ZenithGlobalLayout",
-  components: { DefaultGlobalLayout: GlobalLayout },
+  components: { DefaultGlobalLayout: GlobalLayout, GithubIcon },
   setup(props, context) {
     provide("moment", moment);// TODO enhanceApp里无法注入
     // console.error("查看导入的参数");

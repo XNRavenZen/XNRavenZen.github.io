@@ -24,7 +24,7 @@ const Component = defineComponent({
     const { fontFamily, fontClass, suffix } = toRefs(props);
     // console.error(fontFamily, fontClass, suffix);
     const iconClass = computed(
-      () => `icon ${fontFamily.value} ${fontClass.value}${suffix.value}`
+      () => `base-icon ${fontFamily.value} ${fontClass.value}${suffix.value}`
     );
     return {
       iconClass,

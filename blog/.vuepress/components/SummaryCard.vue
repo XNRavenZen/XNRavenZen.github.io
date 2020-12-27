@@ -8,7 +8,7 @@
         post.author || $themeConfig.author || "noName"
       }}</span>
       <span class="zen zen-calendar">{{
-        post.lastUpdateDate 
+        post.lastUpdateDate || $moment().format("YYYY-MM-DD")
       }}</span>
       <span class="zen zen-tag">{{ tags }}</span>
     </div>
@@ -26,14 +26,13 @@ export default defineComponent({
     }
   },
   setup(props, context) {
-    const { post } = toRefs(props)
-    const _post = post.value;
-    const title = _post.title;
-    const tag = _post.frontmatter.tag;
+    const title = props.post.title;
+    const tag = props.post.frontmatter.tag;
     const tags = tag && tag.join(",");
     return {
       title,
-      tags
+      tags,
+      ...props.post
     }
   },
 })

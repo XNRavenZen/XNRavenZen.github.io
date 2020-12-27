@@ -8,7 +8,6 @@
   ]
 } */
 module.exports = (themeConfig, ctx) => {
-  console.error("查看主题配置", themeConfig, ctx);
   return {
     // ...
     name: "vuepress-theme-zenith",

@@ -1,0 +1,10 @@
+.post-container {
+  box-sizing: border-box;
+  width: 100vw;
+  padding: 0 16px;
+  overflow: scroll;
+
+  blockquote>p {
+    word-break: break-word;
+  }
+}

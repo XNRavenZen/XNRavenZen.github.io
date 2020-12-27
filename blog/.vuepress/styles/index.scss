@@ -1,0 +1,22 @@
+@import "./iconfont"; // 图标
+@import "./varible"; // 变量
+
+@import "./layouts/GlobalLayout"; // 全局布局
+@import "./layouts/Layout"; // 默认布局
+
+@import "./components/BaseIcon"; // 图标
+@import "./components/RecordInfo"; // 备案信息
+@import "./components/BlogPostList";
+@import "./components/SummaryCard";
+
+html,
+body {
+  overflow: hidden;
+}
+
+body {
+  // position: relative;
+  font-size: 14px;
+  margin: 0;
+  height: 100vh;
+}

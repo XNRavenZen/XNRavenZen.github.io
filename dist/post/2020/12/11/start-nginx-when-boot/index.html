@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>开机启动nginx(systemd方式) | zen&#39;s blog</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/image/icon/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/image/icon/apple-touch-icon-152x152.png">
+    <link rel="mask-icon" href="/image/icon/safari-pinned-tab.svg" color="#3eaf7c">
+    <meta name="description" content="Coding & Sleeping">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/image/icon/msapplication-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="/assets/css/0.styles.d7daf976.css" as="style"><link rel="preload" href="/assets/js/styles.0.0.1.1609039178414.min.js" as="script"><link rel="preload" href="/assets/js/app.0.0.1.1609039178414.min.js" as="script"><link rel="preload" href="/assets/js/16.0.0.1.1609039178414.min.js" as="script"><link rel="preload" href="/assets/js/24.0.0.1.1609039178414.min.js" as="script"><link rel="preload" href="/assets/js/29.0.0.1.1609039178414.min.js" as="script"><link rel="preload" href="/assets/js/20.0.0.1.1609039178414.min.js" as="script"><link rel="preload" href="/assets/js/4.0.0.1.1609039178414.min.js" as="script"><link rel="prefetch" href="/assets/js/10.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/11.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/12.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/13.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/14.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/15.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/17.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/18.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/19.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/2.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/21.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/22.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/23.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/25.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/26.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/27.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/28.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/3.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/30.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/31.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/32.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/33.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/34.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/35.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/36.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/5.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/6.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/7.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/8.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/9.0.0.1.1609039178414.min.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.d7daf976.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="global-layout"><header><span class="icon zen zen-menu"></span> <a href="/" class="router-link-active">zen's blog</a>
+     
+    <a href="/tag/">Tag</a>
+     
+     <a href="/github/"></a></header> <aside class="menu-bar"><div class="portrait"><img src="/image/avatar/husky_stuck-out_tongue.jpg" alt class="portrait-avatar"></div></aside> <!----> <div class="container"><div><div class="content__default"><p>1.建立服务文件
+（1）文件路径</p> <p>vim /usr/lib/systemd/system/nginx.service
+（2）服务文件内容</p> <div class="language- extra-class"><pre class="language-text"><code>[Unit]# 服务的说明
+Description=nginx - high performance web server # 描述服务
+After=network.target remote-fs.target nss-lookup.target # 描述服务类别
+
+[Service] # 服务运行参数的设置
+Type=forking # 是后台运行的形式
+ExecStart=/opt/nginx/sbin/nginx # 为服务的具体运行命令
+ExecReload=/opt/nginx/sbin/nginx -s reload # 重启命令
+ExecStop=/opt/nginx/sbin/nginx -s stop # 停止命令
+PrivateTmp=True # 表示给服务分配独立的临时空间
+
+# 注意：启动、重启、停止命令全部要求使用绝对路径
+
+[Install] # 服务安装的相关设置
+WantedBy=multi-user.target # 设置为多用户
+</code></pre></div><p>（3）使文件生效</p> <p>systemctl daemon-reload 2.保存目录
+（1）以 754 的权限保存在目录：</p> <p>/usr/lib/systemd/system
+（2）设置开机自启动</p> <p>systemctl enable nginx.service
+（3）启动 nginx 服务</p> <p>systemctl start nginx.service
+（4）停止开机自启动</p> <p>systemctl disable nginx.service
+（5）查看服务当前状态</p> <p>systemctl status nginx.service
+（6）重新启动服务</p> <p>systemctl restart nginx.service
+（7）查看所有已启动的服务</p> <p>systemctl list-units --type=service 3.命令集合</p> <div class="language-bash extra-class"><pre class="language-bash"><code>systemctl is-enabled servicename.service <span class="token comment">#查询服务是否开机启动</span>
+systemctl <span class="token builtin class-name">enable</span> *.service <span class="token comment">#开机运行服务</span>
+systemctl disable *.service <span class="token comment">#取消开机运行</span>
+systemctl start *.service <span class="token comment">#启动服务</span>
+systemctl stop *.service <span class="token comment">#停止服务</span>
+systemctl restart *.service <span class="token comment">#重启服务</span>
+systemctl reload *.service <span class="token comment">#重新加载服务配置文件</span>
+systemctl status *.service <span class="token comment">#查询服务运行状态</span>
+systemctl --failed <span class="token comment">#显示启动失败的服务</span>
+</code></pre></div><p>注：*代表某个服务的名字，如 http 的服务名为 httpd</p></div></div></div> <footer><div class="icpRecord"><a href="http://beian.miit.gov.cn/" target="_blank" class="ace-link"><span class="record-link-text">闽ICP备2020022217号-1</span></a> <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=35020602001871"><img src="/image/icon/national_emblem.png" class="record-link-icon"> <span class="record-link-text">闽公网安备 35020602001871号</span></a></div></footer></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/styles.0.0.1.1609039178414.min.js" defer></script><script src="/assets/js/16.0.0.1.1609039178414.min.js" defer></script><script src="/assets/js/24.0.0.1.1609039178414.min.js" defer></script><script src="/assets/js/29.0.0.1.1609039178414.min.js" defer></script><script src="/assets/js/20.0.0.1.1609039178414.min.js" defer></script><script src="/assets/js/4.0.0.1.1609039178414.min.js" defer></script><script src="/assets/js/app.0.0.1.1609039178414.min.js" defer></script>
+  </body>
+</html>

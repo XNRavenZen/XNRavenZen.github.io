@@ -1,4 +1,4 @@
-_site/
-.sass-cache/
-.jekyll-cache/
-.jekyll-metadata
+.tempnode_modules
+.temp
+.cache
+node_modules

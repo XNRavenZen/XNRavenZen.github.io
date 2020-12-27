@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>部署blog到服务器上遇到的若干问题 | zen&#39;s blog</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/image/icon/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/image/icon/apple-touch-icon-152x152.png">
+    <link rel="mask-icon" href="/image/icon/safari-pinned-tab.svg" color="#3eaf7c">
+    <meta name="description" content="Coding & Sleeping">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/image/icon/msapplication-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="/assets/css/0.styles.d7daf976.css" as="style"><link rel="preload" href="/assets/js/styles.0.0.1.1609039178414.min.js" as="script"><link rel="preload" href="/assets/js/app.0.0.1.1609039178414.min.js" as="script"><link rel="preload" href="/assets/js/16.0.0.1.1609039178414.min.js" as="script"><link rel="preload" href="/assets/js/24.0.0.1.1609039178414.min.js" as="script"><link rel="preload" href="/assets/js/26.0.0.1.1609039178414.min.js" as="script"><link rel="preload" href="/assets/js/20.0.0.1.1609039178414.min.js" as="script"><link rel="preload" href="/assets/js/4.0.0.1.1609039178414.min.js" as="script"><link rel="prefetch" href="/assets/js/10.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/11.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/12.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/13.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/14.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/15.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/17.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/18.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/19.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/2.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/21.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/22.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/23.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/25.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/27.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/28.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/29.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/3.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/30.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/31.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/32.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/33.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/34.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/35.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/36.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/5.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/6.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/7.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/8.0.0.1.1609039178414.min.js"><link rel="prefetch" href="/assets/js/9.0.0.1.1609039178414.min.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.d7daf976.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="global-layout"><header><span class="icon zen zen-menu"></span> <a href="/" class="router-link-active">zen's blog</a>
+     
+    <a href="/tag/">Tag</a>
+     
+     <a href="/github/"></a></header> <aside class="menu-bar"><div class="portrait"><img src="/image/avatar/husky_stuck-out_tongue.jpg" alt class="portrait-avatar"></div></aside> <!----> <div class="container"><div><div class="content__default"><div class="language- extra-class"><pre class="language-text"><code>Module build failed (from ./node_modules/vue-loader/lib/index.js
+</code></pre></div><ol><li><p>npm install vue-template-compiler -D</p></li> <li><p>npm install</p></li> <li><p>npm run dev</p></li></ol> <blockquote><p>TypeError: Cannot destructure property 'createComponentInstance' of 'vue.ssrUtils' as it is undefined.</p></blockquote> <blockquote><p>[tsl] ERROR in /root/zen_s_blog/blog/.vuepress/enhanceApp.ts(1,41)
+TS2307: Cannot find module './enhanceApp.ts?vue&amp;type=template&amp;id=80a9f242&amp;' or its corresponding type declarations.</p></blockquote> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">npm</span> <span class="token function">install</span> vue-loader -D
+</code></pre></div><blockquote><p>I've just hit this same error, but I don't completely agree with the @papa-zulu given explanation, because - although I don't know Javascript very much - this works:</p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">let</span> ctx <span class="token operator">=</span> require<span class="token punctuation">.</span><span class="token function">context</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">while</span> <span class="token keyword">this</span> doesn't<span class="token operator">:</span>
+
+<span class="token keyword">const</span> x <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> ctx <span class="token operator">=</span> require<span class="token punctuation">.</span><span class="token function">context</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+and <span class="token keyword">in</span> both alternatives the path is a literal<span class="token punctuation">.</span>
+</code></pre></div><blockquote><p>DOMException: Failed to execute 'replaceState' on 'History': A history state object with URL 'https:' cannot be created in a document with origin</p></blockquote></div></div></div> <footer><div class="icpRecord"><a href="http://beian.miit.gov.cn/" target="_blank" class="ace-link"><span class="record-link-text">闽ICP备2020022217号-1</span></a> <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=35020602001871"><img src="/image/icon/national_emblem.png" class="record-link-icon"> <span class="record-link-text">闽公网安备 35020602001871号</span></a></div></footer></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/styles.0.0.1.1609039178414.min.js" defer></script><script src="/assets/js/16.0.0.1.1609039178414.min.js" defer></script><script src="/assets/js/24.0.0.1.1609039178414.min.js" defer></script><script src="/assets/js/26.0.0.1.1609039178414.min.js" defer></script><script src="/assets/js/20.0.0.1.1609039178414.min.js" defer></script><script src="/assets/js/4.0.0.1.1609039178414.min.js" defer></script><script src="/assets/js/app.0.0.1.1609039178414.min.js" defer></script>
+  </body>
+</html>

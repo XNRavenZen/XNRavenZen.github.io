@@ -31,6 +31,7 @@ export default defineComponent({
       }).catch(error => {
         // 请求失败，
         console.log(error);
+        componentName.value = "NotFound"
       }).then(()=>{
         loadingFunc(false)
       })

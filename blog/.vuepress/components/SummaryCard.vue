@@ -4,13 +4,15 @@
       {{ title }}
     </div>
     <div class="summary-bar">
-      <span class="zen zen-author">{{
-        post.author || $themeConfig.author || "noName"
-      }}</span>
-      <span class="zen zen-calendar">{{
-        post.lastUpdateDate || $moment().format("YYYY-MM-DD")
-      }}</span>
-      <span class="zen zen-tag">{{ tags }}</span>
+      <BaseIcon
+        suffix="author"
+        :text="author || $themeConfig.author || 'noName'"
+      ></BaseIcon>
+      <BaseIcon
+        suffix="calendar"
+        :text="lastUpdateDate || $moment().format('YYYY-MM-DD')"
+      ></BaseIcon>
+      <BaseIcon v-if="tags" suffix="tag" :text="tags || ''"></BaseIcon>
     </div>
   </div>
 </template>
@@ -25,15 +27,16 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props, context) {
-    const title = props.post.title;
-    const tag = props.post.frontmatter.tag;
+  setup (props, context) {
+    const { title, author, lastUpdateDate, frontmatter } = toRefs(props.post);
+    const tag = frontmatter.tag || frontmatter.tags;
     const tags = tag && tag.join(",");
     return {
       title,
+      author,
+      lastUpdateDate,
       tags,
-      ...props.post
     }
-  },
+  }
 })
 </script>

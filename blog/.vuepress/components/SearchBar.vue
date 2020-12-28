@@ -15,7 +15,7 @@ export default defineComponent({
     const isShow = ref(false);
     const toggleBar = () => {
       isShow.value = !isShow.value;
-      console.error("点击事件", isShow.value);
+      // console.error("点击事件", isShow.value);
     };
     const bindStyle = computed(() => {
       return {

@@ -13,6 +13,7 @@ import { defineComponent, onMounted } from "@vue/composition-api";
 export default defineComponent({
   setup(props, context) {
     const pageData = context.parent.$page;
+    // console.error(pageData)
     return {
       pageData
     }

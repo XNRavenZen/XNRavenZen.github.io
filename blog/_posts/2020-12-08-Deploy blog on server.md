@@ -1,6 +1,6 @@
 ---
 title: 部署blog到服务器上遇到的若干问题
-tag:
+tags:
   - js
   - nginx
 ---

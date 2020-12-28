@@ -46,7 +46,6 @@ export default defineComponent({
   setup(props, context) {
     const { starredUrls } = toRefs(props);
     onUnmounted(() => {
-      console.error("组件被销毁");
     });
     const urls = starredUrls.value;
     return {

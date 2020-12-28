@@ -47,7 +47,7 @@ export default defineComponent({
   position: relative;
   top: 0;
   min-height: 1.5rem;
-  line-height: 1.5rem;
+  line-height: 1rem;
   padding: 4px;
   margin: 8px 4px;
   width: #{"var(--button-width,3rem)"};

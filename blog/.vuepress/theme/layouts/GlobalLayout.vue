@@ -9,8 +9,6 @@
       &emsp;
       <router-link to="/tag/">Tag</router-link>
       &emsp;
-      <!-- $router.push('github/') -->
-      <!-- <BaseIcon suffix="github"/>-->
       <router-link
         to="/github/"
         v-slot="{ href, route, navigate, isActive, isExactActive }"
@@ -38,59 +36,47 @@
 </template>
 
 <script>
-import { defineComponent, ref, computed, provide, inject, onMounted, nextTick, getCurrentInstance } from '@vue/composition-api'
+import {
+  defineComponent,
+  ref,
+  computed,
+  provide,
+  onMounted,
+} from "@vue/composition-api";
 // import from 'vue-router'
-import scrollbarMethod from '$utils/generateScrollWidth';
-import GlobalLayout from '@app/components/GlobalLayout.vue';
+import scrollbarMethod from "$utils/generateScrollWidth";
+import GlobalLayout from "@app/components/GlobalLayout.vue";
 import moment from "moment";
 import GithubIcon from "$svgIcon/github.svg";
 
 export default defineComponent({
   name: "ZenithGlobalLayout",
   components: { DefaultGlobalLayout: GlobalLayout, GithubIcon },
-  setup(props, context) {
-    provide("moment", moment);// TODO enhanceApp里无法注入
+  setup (props, context) {
+    provide("moment", moment); // TODO enhanceApp里无法注入
     // console.error("查看导入的参数");
     const showMenuBar = ref(false);
-    const toggleMenuBar = () => {// 切换菜单状态
+    const toggleMenuBar = () => {
+      // 切换菜单状态
       showMenuBar.value = !showMenuBar.value;
-    }
+    };
 
-    const startTouching = (event) => {
-      // console.error("事件参数", event)
-    }
-    const store = context.root.$store;
     // TODO 这里用 this 或 context 都访问不到全局计算属性,于是前往 root 访问
     const $site = context.root.$site;
     const $localeConfig = context.root.$localeConfig;
-    const $page = context.root.$page;
-    const $vuepress = context.root.$vuepress;
     const getFixedTitle = computed(() => {
       return $localeConfig.title || $site.title;
     });
-    const isScrollbarShow = ref("none");
-    const computedStyle = computed(() => {
-      return {
-        "--container-scrollbar-display": isScrollbarShow.value
-      }
-    })
-    const scrolling = () => {
-      // console.error("滑动", container.value.scrollTop)
-      const scrollTop = container.value.scrollTop;
-      isScrollbarShow.value = scrollTop > 0 ? "block" : "none";
-    }
     const goPage = (path) => {
-      console.error(context)
-    }
-    onMounted(() => {
-    })
+    };
+    onMounted(() => { });
     return {
-      scrollbarMethod,// 导入的处理方法
+      scrollbarMethod, // 导入的处理方法
       showMenuBar,
       toggleMenuBar,
       getFixedTitle,
       goPage,
-    }
+    };
   },
-})
+});
 </script>

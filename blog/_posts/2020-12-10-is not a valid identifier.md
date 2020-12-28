@@ -1,6 +1,5 @@
 ---
 title: (U+3000) is not a valid identifier
-layout: post
 tag: 
  - java
 ---

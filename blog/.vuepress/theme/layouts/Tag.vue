@@ -9,7 +9,7 @@
       />
       <!-- <BlogPostList v-if="filtedPages.length>0" :list="filtedPages" /> -->
       <template v-for="(tag,index) in filtedPages">
-        <SummaryCard :key="key+index" @click.native="$router.push(tag.path)" :post="tag" />
+        <SummaryCard :key="key+tag.path" @click.native="$router.push(tag.path)" :post="tag" />
       </template>
     </template>
   </div>
@@ -24,13 +24,14 @@ import {
   ref,
   nextTick,
 } from "@vue/composition-api";
+import { getUid } from "$utils/getUUID";
 
 export default defineComponent({
   setup(props, context) {
     const tagData = context.parent["$tag"];
     const pocessList = JSON.parse(JSON.stringify(tagData.list));
     const pageData = ref(null);
-    const key = ref(0); // key属性值,强制组件刷新
+    const key = ref(getUid()); // key属性值,强制组件刷新
     pageData.value = pocessList[0] ? pocessList[0].pages : [];
     const filtedPages = computed({
       get() {
@@ -47,7 +48,7 @@ export default defineComponent({
       return thing;
     };
     const showContentByTag = (pages) => {
-      key.value += 1;
+      key.value = getUid();
       filtedPages.value = pages;
     };
     return {

@@ -29,7 +29,7 @@ export default defineComponent({
   },
   setup (props, context) {
     const { title, author, lastUpdateDate, frontmatter } = toRefs(props.post);
-    const tag = frontmatter.tag || frontmatter.tags;
+    const tag = frontmatter["tag"] || frontmatter["tags"];
     const tags = tag && tag.join(",");
     return {
       title,

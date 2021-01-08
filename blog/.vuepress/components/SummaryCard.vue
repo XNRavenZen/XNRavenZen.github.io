@@ -28,7 +28,8 @@ export default defineComponent({
     }
   },
   setup (props, context) {
-    const { title, author, lastUpdateDate, frontmatter } = toRefs(props.post);
+    const { post } = toRefs(props);
+    const { title, author, lastUpdateDate, frontmatter } = post.value;
     const tag = frontmatter["tag"] || frontmatter["tags"];
     const tags = tag && tag.join(",");
     return {

@@ -6,20 +6,29 @@
 <!-- </ClientOnly> -->
 
 <script>
-import {defineComponent,ref,onMounted,computed,createApp,inject} from "@vue/composition-api"
+import {
+  defineComponent,
+  ref,
+  onMounted,
+  computed,
+  createApp,
+  inject
+} from "@vue/composition-api"
 import axios from "axios";
 
 export default defineComponent({
   setup(props,context) {
     const responseData = ref(null);
     const componentName = ref(null);
+    const $themeConfig = context.root.$themeConfig;
+    // console.error("查看主题配置",$themeConfig);
      onMounted(async () => {
       const store = context.root.$store;
       const loadingFunc = store.state.loadingFunc;
       loadingFunc();
       await axios({
         method: 'get',
-        url: 'https://api.github.com/users/XNRavenZen/starred',
+        url: `https://api.github.com/users/${$themeConfig.githubAccount}/starred`,
         responseType: 'json'
       }).then(response => {
         // 请求成功

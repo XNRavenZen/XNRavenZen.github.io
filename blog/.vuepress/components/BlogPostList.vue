@@ -1,7 +1,7 @@
 <template>
   <div class="blog-post-list">
     <template v-for="tag in blogList">
-      <SummaryCard @click.native="$router.push(tag.path)" :post="tag" />
+      <SummaryCard :key="tag.path" @click.native="$router.push(tag.path)" :post="tag" />
     </template>
   </div>
 </template>

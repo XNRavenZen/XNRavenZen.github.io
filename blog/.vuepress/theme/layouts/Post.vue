@@ -20,13 +20,3 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="scss">
-.post-main-title {
-  padding: 0 16px;
-  text-align: center;
-  font-size: 1.5rem;
-}
-.post-container {
-  margin-left: 16px;
-}
-</style>

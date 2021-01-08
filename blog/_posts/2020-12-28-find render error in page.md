@@ -11,7 +11,7 @@ tag 页面原先点击不同按钮切换时，下方列表的首个标题固定�
 ```vue
 <template v-for="(tag, index) in filtedPages">
   <SummaryCard
-    :key="key + tag.path"
+    :key="key + tag.path"// 直接使用path也可以,路径也是唯一
     @click.native="$router.push(tag.path)"
     :post="tag"
   />

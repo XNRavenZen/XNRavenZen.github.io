@@ -1,104 +1,17 @@
 const path = require("path");
-const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const timestamp = new Date().getTime();
 process.env.VUE_APP_VERSION = require("../../package.json").version;
 const appVersion = process.env.VUE_APP_VERSION;
+const headConf = require("./config/head.ts");
+const themeConf = require("./config/themeConfig.ts");
+const pluginsConfig = require("./config/plugins.ts");
 module.exports = {
   base: "/",
   // assetsPublicPath:"/",
   dest: "./dist",
   cache: false,
-  head: [
-    ["link", { rel: "icon", href: "/image/icon/logo.png" }],
-    ["link", { rel: "manifest", href: "/manifest.json" }],
-    ["meta", { name: "theme-color", content: "#3eaf7c" }],
-    ["meta", { name: "apple-mobile-web-app-capable", content: "yes" }],
-    [
-      "meta",
-      { name: "apple-mobile-web-app-status-bar-style", content: "black" },
-    ],
-    [
-      "link",
-      {
-        rel: "apple-touch-icon",
-        href: "/image/icon/apple-touch-icon-152x152.png",
-      },
-    ],
-    [
-      "link",
-      {
-        rel: "mask-icon",
-        href: "/image/icon/safari-pinned-tab.svg",
-        color: "#3eaf7c",
-      },
-    ],
-    [
-      "meta",
-      {
-        name: "msapplication-TileImage",
-        content: "/image/icon/msapplication-icon-144x144.png",
-      },
-    ],
-    ["meta", { name: "msapplication-TileColor", content: "#000000" }],
-  ],
-  plugins: {
-    ...new VueLoaderPlugin(),
-    "@vuepress/blog": {
-      directories: [
-        {
-          id: "post",
-          dirname: "_posts",
-          path: "/post/",
-          itemPermalink: "/post/:year/:month/:day/:slug",
-          pagination: {
-            lengthPerPage: 10,
-          },
-        },
-      ],
-      frontmatters: [
-        {
-          id: "tag",
-          keys: ["tag", "tags"],
-          path: "/tag/",
-          layout: "Tag",
-          // frontmatter: { title: 'Tag' },
-          // itemlayout: 'Post',
-          // itemlayout:"Layout",
-          // scopeLayout: 'Tag',
-          pagination: {
-            perPagePosts: 3,
-          },
-        },
-      ],
-      sitemap: {
-        hostname: "https://not-me.fun",
-      },
-    },
-    "vuepress-plugin-typescript": {
-      tsLoaderOptions: {
-        // ts-loader 的所有配置项
-      },
-    },
-    "@vuepress/last-updated": true,
-    "@vuepress/active-header-links": {
-      sidebarLinkSelector: ".sidebar-link",
-      headerAnchorSelector: ".header-anchor",
-    },
-    "@vuepress/pwa": {
-      serviceWorker: true,
-      updatePopup: {
-        "/": {
-          message: "发现新内容可用",
-          buttonText: "刷新",
-        },
-        "/en/": {
-          message: "New content is available.",
-          buttonText: "Refresh",
-        },
-      },
-      popupComponent: "ZenUpdatePopup",
-    },
-  },
+  head: headConf,
+  plugins: pluginsConfig,
   locales: {
     // 键名是该语言所属的子路径
     // 作为特例，默认语言可以使用 '/' 作为其路径。
@@ -113,17 +26,16 @@ module.exports = {
       description: "Coding & Sleeping",
     },
   },
+  extraWatchFiles: [
+    ".vuepress/config/*.ts", // 监听配置的修改
+  ],
   // theme:"zen",
   thme: "zenith",
-  themeConfig: {
-    avatar: "/image/avatar/husky_stuck-out_tongue.jpg", // 头像放在public/image/avatar下
-    hasBeenRecorded: true,
-    ICPNum: "闽ICP备2020022217号-1", // ICP备案号
-    NISMNum: "闽公网安备 35020602001871号", // 公安联网备案号
-    iconSrc: "/image/icon/national_emblem.png", // 备案所需国徽图案文件路径(相对于base路径)
-    // $showloading: showLoading,
-  },
+  themeConfig: themeConf,
   stylus: {},
+  css: {
+    extract: false,
+  },
   sass: { indentedSyntax: true },
   scss: {
     includePaths: ["./styles/scss/index.scss", "./styles/scss/_variable.scss"],
@@ -147,7 +59,12 @@ module.exports = {
     config.resolve.alias.set("$comp", path.resolve(__dirname, "components"));
     config.resolve.alias.set("$utils", path.resolve(__dirname, "utils"));
 
-    console.error("查看配置", config.module.rule("css").uses);
+    // config.optimization.delete('splitChunks');// 去掉分块
+    const splitChunksObj = config.optimization.get("splitChunks");
+    console.dir("查看chunk", splitChunksObj); // 去掉分块
+    // console.error("查看配置", config.module.rule("css").uses);
+    config.module.rule("css").uses.clear();
+
     config.module.rules.delete("svg");
     config.module
       .rule("svg")

@@ -15,6 +15,14 @@ Module build failed (from ./node_modules/vue-loader/lib/index.js
 
 3. npm run dev
 
+> 2020-12-31 更新类似问题
+```
+Uncaught Error: Module build failed (from ./node_modules/@vuepress/core/node_modules/babel-loader/lib/index.js)
+```
+
+
+
+
 > TypeError: Cannot destructure property 'createComponentInstance' of 'vue.ssrUtils' as it is undefined.
 
 > [tsl] ERROR in /root/zen_s_blog/blog/.vuepress/enhanceApp.ts(1,41)

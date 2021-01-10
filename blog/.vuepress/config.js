@@ -2,9 +2,10 @@ const path = require("path");
 const timestamp = new Date().getTime();
 process.env.VUE_APP_VERSION = require("../../package.json").version;
 const appVersion = process.env.VUE_APP_VERSION;
-const headConf = require("./config/head.ts");
-const themeConf = require("./config/themeConfig.ts");
-const pluginsConfig = require("./config/plugins.ts");
+const headConf = require("./config/head.ts"); // 头部配置
+const themeConf = require("./config/themeConfig.ts"); // 主题配置
+const pluginsConfig = require("./config/plugins.ts"); // 插件配置
+const localeConfig = require("./config/localeConfig.ts"); // 插件配置
 module.exports = {
   base: "/",
   // assetsPublicPath:"/",
@@ -12,20 +13,7 @@ module.exports = {
   cache: false,
   head: headConf,
   plugins: pluginsConfig,
-  locales: {
-    // 键名是该语言所属的子路径
-    // 作为特例，默认语言可以使用 '/' 作为其路径。
-    "/": {
-      lang: "zh-CN",
-      title: "zen's blog",
-      description: "Coding & Sleeping",
-    },
-    "/en/": {
-      lang: "en-US", // 将会被设置为 <html> 的 lang 属性
-      title: "zen's blog",
-      description: "Coding & Sleeping",
-    },
-  },
+  locales: localeConfig,
   extraWatchFiles: [
     ".vuepress/config/*.ts", // 监听配置的修改
   ],
@@ -50,7 +38,8 @@ module.exports = {
     },
   },
   chainWebpack: (config, isServer) => {
-    // config.resolve.alias.set('$theme', path.resolve(__dirname, 'theme'))
+    config.resolve.alias.set('$theme', path.resolve(__dirname, 'theme'))
+    config.resolve.alias.set("$config", path.resolve(__dirname, "config"));
     config.resolve.alias.set("$plugins", path.resolve(__dirname, "plugins"));
     config.resolve.alias.set(
       "$svgIcon",
@@ -61,7 +50,6 @@ module.exports = {
 
     // config.optimization.delete('splitChunks');// 去掉分块
     const splitChunksObj = config.optimization.get("splitChunks");
-    console.dir("查看chunk", splitChunksObj); // 去掉分块
     // console.error("查看配置", config.module.rule("css").uses);
     config.module.rule("css").uses.clear();
 

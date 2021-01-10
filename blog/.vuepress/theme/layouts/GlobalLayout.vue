@@ -1,78 +1,17 @@
-<!--
- * @LastEditors: XNRavenZen
--->
 <template>
   <div class="global-layout">
     <header>
-      <BaseIcon
-        suffix="menu"
-        @click.native="toggleMenuBar($event, null, true)"
-      />
-      <router-link
-        to="/"
-        v-slot="{ href, route, navigate, isActive, isExactActive }"
-      >
-        <span @click="toggleMenuBar($event, navigate)">{{
-          getFixedTitle
-        }}</span>
-      </router-link>
-      &emsp;
-      <router-link
-        to="/tag/"
-        v-slot="{ href, route, navigate, isActive, isExactActive }"
-      >
-        <span @click="toggleMenuBar($event, navigate)">Tag</span>
-      </router-link>
-      &emsp;
-      <router-link
-        to="/github/"
-        v-slot="{ href, route, navigate, isActive, isExactActive }"
-      >
-        <GithubIcon @click="toggleMenuBar($event, navigate)"></GithubIcon>
-      </router-link>
-    </header>
-    <aside :class="['menu-bar', showMenuBar ? 'menu-bar-open' : '']">
-      <div class="portrait">
-        <img
-          :src="$withBase($themeConfig.avatar)"
-          alt=""
-          class="portrait-avatar"
+      <!-- 菜单迁移到配置中 -->
+      <template v-for="(info, index) in filtedMenu">
+        <component
+          :is="info.componentName"
+          :key="`${info.role}${index}`"
+          v-bind="info.bind"
+          v-on="info.on"
         />
-        <router-link
-          to="/"
-          v-slot="{ href, route, navigate, isActive, isExactActive }"
-        >
-          <div class="aside-row">
-            <span @click="toggleMenuBar($event, navigate)">{{
-              getFixedTitle
-            }}</span>
-          </div>
-        </router-link>
-        &emsp;
-        <router-link
-          to="/tag/"
-          v-slot="{ href, route, navigate, isActive, isExactActive }"
-        >
-          <div class="aside-row">
-            <span @click="toggleMenuBar($event, navigate)">Tag</span>
-          </div>
-        </router-link>
-        &emsp;
-        <router-link
-          to="/github/"
-          v-slot="{ href, route, navigate, isActive, isExactActive }"
-        >
-          <div class="aside-row">
-            <GithubIcon @click="toggleMenuBar($event, navigate)"></GithubIcon>
-          </div>
-        </router-link>
-      </div>
-    </aside>
-    <div
-      v-if="showMenuBar"
-      @click="toggleMenuBar($event, null)"
-      class="menu-bar-mask"
-    />
+      </template>
+    </header>
+    <AsiderMenu></AsiderMenu>
     <div class="container">
       <!-- 展示内容 -->
       <DefaultGlobalLayout />
@@ -93,13 +32,14 @@ import {
 // import from 'vue-router'
 import scrollbarMethod from "$utils/generateScrollWidth";
 import GlobalLayout from "@app/components/GlobalLayout.vue";
+import AsiderMenu from "$theme/components/AsiderMenu.vue";
 import moment from "moment";
-import GithubIcon from "$svgIcon/github.svg";
+import { menuRouter } from "$config/menuRouter.ts"
 
 export default defineComponent({
   name: "ZenithGlobalLayout",
-  components: { DefaultGlobalLayout: GlobalLayout, GithubIcon },
-  setup(props, context) {
+  components: { DefaultGlobalLayout: GlobalLayout, AsiderMenu },
+  setup (props, context) {
     provide("moment", moment); // TODO enhanceApp里无法注入
     const showMenuBar = ref(false);
     const fixedPin = ref(false);
@@ -122,16 +62,30 @@ export default defineComponent({
     const getFixedTitle = computed(() => {
       return $localeConfig.title || $site.title;
     });
-    const goPage = (path) => {};
+    const goPage = (path) => { };
     onMounted(() => {
-      console.error("查看配置", context.root, $site);
+      console.error("查看配置", menuRouter);
     });
+    const store = context.root.$store;
+    const filtedMenu = computed(() => menuRouter.map(mr => {
+      return Object.assign({}, mr, {
+        on: Object.assign({}, mr.on, {
+          "click": () => {
+            console.error("点击了事件");
+            store.commit("toggleAsiderMenu");
+          }
+        })
+      })
+    }))
+    console.error("查看菜单", filtedMenu);
     return {
       scrollbarMethod, // 导入的处理方法
       showMenuBar,
       toggleMenuBar,
       getFixedTitle,
       goPage,
+      // menuRouter
+      filtedMenu,
     };
   },
 });

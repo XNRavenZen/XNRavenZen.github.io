@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="post-main">
     <div class="post-main-title">{{ pageData.title }}</div>
     <div class="post-container">
       <Content />

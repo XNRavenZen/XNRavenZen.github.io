@@ -37,7 +37,7 @@ const menuRouter = [
     componentName: "RouterLinkComp",
     bind: {
       path: "/tag",
-      innerWord: "tag",
+      innerWord: "标签",
       onObj: [
         {
           type: "click",

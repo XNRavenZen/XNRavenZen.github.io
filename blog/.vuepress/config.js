@@ -26,7 +26,6 @@ module.exports = {
   },
   sass: { indentedSyntax: true },
   scss: {
-    includePaths: ["./styles/scss/index.scss", "./styles/scss/_variable.scss"],
   },
   markdown: {
     anchor: { permalink: false },
@@ -38,7 +37,7 @@ module.exports = {
     },
   },
   chainWebpack: (config, isServer) => {
-    config.resolve.alias.set('$theme', path.resolve(__dirname, 'theme'))
+    config.resolve.alias.set("$theme", path.resolve(__dirname, "theme"));
     config.resolve.alias.set("$config", path.resolve(__dirname, "config"));
     config.resolve.alias.set("$plugins", path.resolve(__dirname, "plugins"));
     config.resolve.alias.set(

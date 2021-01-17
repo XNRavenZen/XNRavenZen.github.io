@@ -64,6 +64,6 @@ export default defineComponent({
 </script>
 <style lang="scss">
 .link-button {
-  margin: 0 4px;
+  margin: 0 8px;
 }
 </style>

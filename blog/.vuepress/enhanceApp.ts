@@ -2,21 +2,16 @@
 import "./styles/index.ts";
 import Vuex from "vuex";
 import moment from "moment";
-import {
-  default as VueCompositionApi,
-  createApp,
-  ref,
-  h,
-  getCurrentInstance,
-} from "@vue/composition-api";
+import { default as VueCompositionApi } from "@vue/composition-api";
 import storeOption from "./store";
 import importAll from "./utils/importAll";
+
 const testArgs = importAll(
   require.context("./public/image/icon/svg", true, /\.svg$/),
   /\.svg$/,
   "g"
 );
-console.error("查看引入svg", testArgs);
+
 const enhanceApp = ({
   Vue, // VuePress 正在使用的 Vue 构造函数
   options, // 附加到根实例的一些选项

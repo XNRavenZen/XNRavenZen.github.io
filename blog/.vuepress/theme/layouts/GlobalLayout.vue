@@ -63,21 +63,19 @@ export default defineComponent({
       return $localeConfig.title || $site.title;
     });
     const goPage = (path) => { };
-    onMounted(() => {
-      console.error("查看配置", menuRouter);
-    });
     const store = context.root.$store;
     const filtedMenu = computed(() => menuRouter.map(mr => {
       return Object.assign({}, mr, {
         on: Object.assign({}, mr.on, {
           "click": () => {
-            console.error("点击了事件");
             store.commit("toggleAsiderMenu");
           }
         })
       })
     }))
-    console.error("查看菜单", filtedMenu);
+    onMounted(() => {
+      // console.error("查看配置", menuRouter,filtedMenu);
+    });
     return {
       scrollbarMethod, // 导入的处理方法
       showMenuBar,

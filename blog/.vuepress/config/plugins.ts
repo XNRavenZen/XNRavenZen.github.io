@@ -66,7 +66,7 @@ module.exports = [
           buttonText: "Refresh",
         },
       },
-      popupComponent: "ZenUpdatePopup",
+      // popupComponent: "ZenUpdatePopup", // 更新新内容提示组件 
     },
   ],
 ];

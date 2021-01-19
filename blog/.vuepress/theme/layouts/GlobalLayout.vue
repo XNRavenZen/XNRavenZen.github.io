@@ -10,6 +10,7 @@
           v-on="info.on"
         />
       </template>
+      <SearchBox />
     </header>
     <AsiderMenu></AsiderMenu>
     <div class="container">
@@ -29,17 +30,17 @@ import {
   provide,
   onMounted,
 } from "@vue/composition-api";
-// import from 'vue-router'
+import SearchBox from "@SearchBox";
 import scrollbarMethod from "$utils/generateScrollWidth";
 import GlobalLayout from "@app/components/GlobalLayout.vue";
 import AsiderMenu from "$theme/components/AsiderMenu.vue";
 import moment from "moment";
-import { menuRouter } from "$config/menuRouter.ts"
+import { menuRouter } from "$config/menuRouter.ts";
 
 export default defineComponent({
   name: "ZenithGlobalLayout",
-  components: { DefaultGlobalLayout: GlobalLayout, AsiderMenu },
-  setup (props, context) {
+  components: { DefaultGlobalLayout: GlobalLayout, AsiderMenu, SearchBox },
+  setup(props, context) {
     provide("moment", moment); // TODO enhanceApp里无法注入
     const showMenuBar = ref(false);
     const fixedPin = ref(false);
@@ -62,17 +63,19 @@ export default defineComponent({
     const getFixedTitle = computed(() => {
       return $localeConfig.title || $site.title;
     });
-    const goPage = (path) => { };
+    const goPage = (path) => {};
     const store = context.root.$store;
-    const filtedMenu = computed(() => menuRouter.map(mr => {
-      return Object.assign({}, mr, {
-        on: Object.assign({}, mr.on, {
-          "click": () => {
-            store.commit("toggleAsiderMenu");
-          }
-        })
+    const filtedMenu = computed(() =>
+      menuRouter.map((mr) => {
+        return Object.assign({}, mr, {
+          on: Object.assign({}, mr.on, {
+            click: () => {
+              store.commit("toggleAsiderMenu");
+            },
+          }),
+        });
       })
-    }))
+    );
     onMounted(() => {
       // console.error("查看配置", menuRouter,filtedMenu);
     });

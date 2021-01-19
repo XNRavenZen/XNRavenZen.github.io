@@ -65,5 +65,6 @@ export default defineComponent({
 <style lang="scss">
 .link-button {
   margin: 0 8px;
+  cursor: url("/image/cursor/mario/Link-Select.cur"),pointer;
 }
 </style>

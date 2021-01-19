@@ -4,9 +4,15 @@ import Vue from 'vue';
  */
 const menuRouter = [
   {
-    componentName: "BaseIcon",
+    // componentName: "BaseIcon",
+    // bind: {
+    componentName: "RouterLinkComp",
     bind: {
-      suffix: "menu",
+      compName:"BaseIcon",
+      path: "/",
+      bindObj:{
+        suffix: "menu",
+      },
       onObj: [
         {
           type: "click",
